@@ -36,9 +36,16 @@ class MainActivity : AppCompatActivity() {
 
         refreshContactsInRecycler()
 
-        val callback: ItemTouchHelper.Callback = DragItemHelperCallback(contactAdapter)
+        val callback: ItemTouchHelper.Callback = DragItemHelperCallback(
+            contactAdapter,
+            ::moveContact,
+        )
         val touchHelper = ItemTouchHelper(callback)
         touchHelper.attachToRecyclerView(binding.activityMainRecyclerView)
+    }
+
+    private fun moveContact(oldPosition: Int, newPosition: Int) {
+        contactRepository.moveContact(oldPosition, newPosition)
     }
 
     private fun showRemoveButton(show: Boolean) {
@@ -79,7 +86,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshContactsInRecycler() {
-        contactAdapter.updateItemsList(contactRepository.getContacts())
+        val contacts = contactRepository.getContacts()
+        contactAdapter.updateItemsList(contacts)
     }
 
     companion object {

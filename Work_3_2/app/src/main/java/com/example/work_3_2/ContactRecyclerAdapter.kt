@@ -106,8 +106,10 @@ class ContactRecyclerAdapter(
 
     companion object {
         private val diffContact = object : DiffUtil.ItemCallback<Contact>() {
-            override fun areItemsTheSame(oldItem: Contact, newItem: Contact) =
-                oldItem.id == newItem.id
+            override fun areItemsTheSame(
+                oldItem: Contact,
+                newItem: Contact
+            ) = oldItem.id == newItem.id
 
             override fun areContentsTheSame(
                 oldItem: Contact,

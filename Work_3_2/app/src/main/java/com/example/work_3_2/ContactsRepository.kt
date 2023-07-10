@@ -19,7 +19,6 @@ class ContactsRepository {
         }
     }
 
-
     fun getContacts(): List<Contact> {
         return contacts.map { it.copy() }
     }
@@ -40,5 +39,11 @@ class ContactsRepository {
 
     fun removeContacts(contactsId: List<Int>): Boolean {
         return contacts.removeIf { contactsId.contains(it.id) }
+    }
+
+    fun moveContact(oldPosition: Int, newPosition: Int) {
+        val contact = contacts[oldPosition]
+        contacts.remove(contact)
+        contacts.add(newPosition, contact)
     }
 }
